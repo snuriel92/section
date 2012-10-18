@@ -4,22 +4,18 @@
 
 def sort(urls):
 	size = len(urls)
-	
+
 	for index in range(size-1):
 		indexOfSmallest = findSmallest(urls, index, size)
 		if(index != indexOfSmallest):
 			temp = urls[index]
 			urls[index] = urls[indexOfSmallest]
 			urls[indexOfSmallest] = temp
-		
 
 def findSmallest(arr, i, size):
 	currSmallestIndex = i
 	for j in range(i, size):
 		if(arr[j] < arr[currSmallestIndex]):
 			currSmallestIndex = j
-			
-	return currSmallestIndex
 
-		
-			
+	return currSmallestIndex
