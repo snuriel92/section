@@ -1,4 +1,5 @@
 # Heap sort
+from heapq import heappush, heappop
 
 def sort(urls):
     size = len(urls)
