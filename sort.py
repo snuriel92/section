@@ -44,7 +44,7 @@ def main():
     infile = None
 
   # argparser guarantees a valid choice for sort_fn
-  lines = _sort(lines, sort_fns[sort_fn].sort)
+  lines = _sort(lines, sort_fns[sort_fn])
 
   # write output
   try:
