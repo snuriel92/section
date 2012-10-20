@@ -3,8 +3,7 @@
 #     best    -- O(n log n) 
 #     average -- O(n log n) 
 #     worst   -- O(n log n) 
-# This implementation does not sort in place. Instead, it returns a new 
-# instance of the sorted array. 
+# This implementation sorts in place (). 
 # 
 # We might also want to consider using the .sort function in Python which
 # to the best of my understanding it is base on Timsort.
@@ -12,32 +11,29 @@
 #    https://secure.wikimedia.org/wikipedia/en/wiki/Timsort
 # 
 
-def sort(array):
-    if len(array) <= 1:
-        return array
-    else:
-        left  = array[:len(array)/2] 
-        right = array[len(array)/2:] 
-        return merge(sort(left),sort(right))
+def sort(array,s=0,e=-1):
+	if e == -1:
+	  e = len(array)
+	  
+	if e-s>1:                     
+	  mid = s+((e-s)/2)
+	  sort(array,s,mid)
+	  sort(array,mid,e)
+	  merge(array,s,mid,mid,e)
+	return
 
-def merge(array1, array2):
-    merged_array = []
-    p1, p2 = 0, 0
-    
-    while p1 < len(array1) and p2 < len(array2):
-        if array1[p1] < array2[p2]:
-            merged_array.append(array1[p1])
-            p1 += 1
-        else:
-            merged_array.append(array2[p2])
-            p2 += 1
-            
-    while p1 < len(array1):
-        merged_array.append(array1[p1])
-        p1 += 1
+def merge(array,s1,e1,s2,e2):
+	''' Minimizes copies.  Not truly inplace '''
+	start = s1
+	result = []
+	while (e1-s1>0) and (e2-s2>0):
+	 if (array[s1] <= array[s2]):
+	   result.append(array[s1])        
+	   s1 += 1
+	 else:
+	   result.append(array[s2])
+	   s2 += 1
 
-    while p2 < len(array2):
-        merged_array.append(array2[p2])
-        p2 += 1
-
-    return merged_array
+	result += array[s1:e1] + array[s2:e2]            
+	array[start:e2]=result
+	return
