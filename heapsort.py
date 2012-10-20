@@ -7,5 +7,5 @@ def sort(urls):
         heappush(heap, url)
         urls.pop(0)
     for i in range(size):
-        urls.insert(0, heappop(heap))
+        urls.append(heappop(heap))
     return
