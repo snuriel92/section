@@ -1,6 +1,9 @@
 # Radix sort
 
 def sort(urls):
+    # If it's empty don't bother sorting.
+    if (not urls):
+      return urls
     # Make a temp list since I can't lose the reference to urls.
     temp = list(urls)
     maxlen = max(map(lambda url: len(url), temp))
