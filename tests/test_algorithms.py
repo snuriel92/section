@@ -1,9 +1,11 @@
 #!/usr/bin/python
 import unittest
 import sys
+import os
 
 # FIXME pretty sure this is a hack, but I don't know how python works
-sys.path.append('..')
+root = os.path.join(os.path.dirname(__file__), '../')
+sys.path.append(root)
 
 from algorithms import sort_fns
 

@@ -24,7 +24,8 @@ separation of the files while still providing a simple interface.
 
 The proper usage of our script is:
 python sort.py -i INPUT_FILE -o OUTPUT_FILE
-    --sort-fn [radixsort, mergesort, quicksort, selectionsort]
+    --sort-fn [radixsort, radixsort2, mergesort, mergesort2, quicksort,
+               heapsort, selectionsort, selectionsort2]
 
 Using the files we provide, one working command would be:
       python sort.py -i test_input.txt -o output.txt --sort-fn mergesort
