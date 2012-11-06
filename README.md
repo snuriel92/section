@@ -45,7 +45,13 @@ worst case runtime within the specified parameters. Python had built in
 functions that made heapsort easy to use, and many of us have experience with
 mergesort and quicksort, but we opted to use the former as quicksort would have
 been much more complicated. The O(n) algorithm was radix sort, which uses
-buckets for each possible ASCII value to sort the URLs. For all these
+buckets for each possible ASCII value to sort the URLs. Radix sort is a
+specialty sorting algorithm that takes advantage of the fact that the elements
+being sorted can be broken up into singular chunks that are limited in number
+(in this case one of 255 characters). This breaking up into singular chunks
+results in k passes, where k is the number of chunks in the longest element.
+If n >> k, the algorithm is essentially O(n). However, this is not always the
+case so the true worst case of this algorithm is O(kn). For all these
 algorithms we assume that the URLs use proper ASCII values and do not contain
 other symbols.
 
