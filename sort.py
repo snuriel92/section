@@ -17,7 +17,10 @@ def main():
   parser.add_argument('-o', metavar='out-file', required=True,
                       type=argparse.FileType('w'),
                       help='output file for sorted strings, one per line')
-
+  # Optional command line argument enables/disables (default) url 
+  # validation.  
+  parser.add_argument('-u', metavar='url-valdation', required=False,
+                      help='enable url validation.')
   # get available sort functions to use for argument choices
   choices = tuple(sort_fns.keys())
   if 'selectionsort' in sort_fns:
@@ -33,6 +36,7 @@ def main():
   infile = results.i
   outfile = results.o
   sort_fn = results.sort_fn
+  urlvalidate = results.u
 
   # read lines
   try:
@@ -42,6 +46,9 @@ def main():
   finally:
     infile.close()
     infile = None
+
+  # TODO:
+  # Add implementation for URL validation here depending on user options 
 
   # argparser guarantees a valid choice for sort_fn
   lines = _sort(lines, sort_fns[sort_fn])
