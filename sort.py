@@ -20,7 +20,7 @@ def main():
   # Optional command line argument enables/disables (default) url 
   # validation.  
   parser.add_argument('-u', metavar='url-valdation', required=False,
-                      help='enable url validation.')
+                      help='enable url validation.', type=bool, default=False)
   # get available sort functions to use for argument choices
   choices = tuple(sort_fns.keys())
   if 'selectionsort' in sort_fns:
