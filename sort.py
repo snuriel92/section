@@ -47,8 +47,10 @@ def main():
     infile.close()
     infile = None
 
-  # TODO:
-  # Add implementation for URL validation here depending on user options 
+  # check for URL validation flag, if set we drop into validation function 
+  # and run the validation
+  if urlvalidate == True:
+    lines = _validate(lines)
 
   # argparser guarantees a valid choice for sort_fn
   lines = _sort(lines, sort_fns[sort_fn])
@@ -64,6 +66,16 @@ def main():
     outfile = None
 
   sys.exit(0)
+  
+def _validate(url_list):
+  """Returns a validated copy of URLs list"""
+  validated_url = list(url_list)
+  
+  ##
+  ## Add validation function/algorithm here   
+  ##
+  
+  return validated_url
 
 def _sort(str_list, sort_fn):
   """Return a sorted copy of str_list, using functionsort_fn"""
