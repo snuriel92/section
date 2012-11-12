@@ -49,7 +49,7 @@ def main():
 
   # check for URL validation flag, if set we drop into validation function 
   # and run the validation
-  if urlvalidate == True:
+  if urlvalidate:
     lines = _validate(lines)
 
   # argparser guarantees a valid choice for sort_fn
