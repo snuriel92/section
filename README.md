@@ -57,7 +57,7 @@ algorithms we assume that the URLs use proper ASCII values and do not contain
 other symbols.
 
 The documentation for our URL validation and canonicalization design may be
-found at https://github.com/Full-House-UW/section/wiki/URL-Validation.
+found at https://github.com/Full-House-UW/section/wiki/URL-Validation-and-Canonicalization.
 
 Group Division:
  * Corneliu, Brandon - Merge sort
