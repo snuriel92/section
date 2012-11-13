@@ -56,12 +56,14 @@ case so the true worst case of this algorithm is O(kn). For all these
 algorithms we assume that the URLs use proper ASCII values and do not contain
 other symbols.
 
+The documentation for our URL validation and canonicalization design may be
+found at https://github.com/Full-House-UW/section/wiki/URL-Validation.
 
 Group Division:
  * Corneliu, Brandon - Merge sort
- * Jeff- script setup and design.
- * Conor- radix sort 
- * Janette-  Heapsort
- * Nat- testing 
- * Shahaf- Selection sort
- * Shahaf & Janette- coordination   
+ * Jeff - Script setup and design
+ * Conor - Radix sort
+ * Janette -  Heapsort
+ * Nat - Testing
+ * Shahaf - Selection sort
+ * Shahaf & Janette - Coordination
