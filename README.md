@@ -27,6 +27,21 @@ python sort.py -i INPUT_FILE -o OUTPUT_FILE
     --sort-fn [radixsort, radixsort2, mergesort, mergesort2, quicksort,
                heapsort, selectionsort, selectionsort2]
 
+Optional parameter `--validate-fn` has been added to support upcoming URL 
+validation. This option is currently stubbed and it does not actually perform 
+any real URL validation. The general use for this option:
+ --validate-fn[all, valid, invalid]
+
+`all` : allows all URLs to pass thorough
+`valid`: Allows only valid URLs to pass through 
+`invalid`: Allows only invalid URLs to pass through
+
+
+Using the files we provide, one working command would be:
+      python sort.py -i test_input.txt -o output.txt --sort-fn mergesort
+You can then test the correctness of the sorting by calling:
+      diff test_output.txt output.txt
+
 Using the files we provide, one working command would be:
       python sort.py -i test_input.txt -o output.txt --sort-fn mergesort
 You can then test the correctness of the sorting by calling:
