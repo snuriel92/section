@@ -7,6 +7,7 @@ import argparse
 import sys
 
 from algorithms import sort_fns
+from algorithms import url_validation_fns
 
 def main():
   parser = argparse.ArgumentParser(description='Simple sort program')
@@ -17,11 +18,28 @@ def main():
   parser.add_argument('-o', metavar='out-file', required=True,
                       type=argparse.FileType('w'),
                       help='output file for sorted strings, one per line')
-  # Optional command line argument enables/disables (default) url 
-  # validation.  
-  parser.add_argument('-u', metavar='url-valdation', required=False,
-                      help='enable url validation.', type=bool, default=False)
-  # get available sort functions to use for argument choices
+  
+  # Create URL validation options
+  # Get available functions to use for url validation choices
+  # from the list of functions defined in __init__.py
+  # 
+  url_validation_choices = tuple(url_validation_fns.keys())
+  
+
+  # Set a default URL validation function 
+  #
+  if 'all' in url_validation_fns:
+    default_url_validation_choice = 'all'
+  else:
+    default_url_validation_choice = url_validation_choices[0]
+  
+  # Add command line argument options to parser 
+  parser.add_argument('--validate-fn', dest='validate_fn',
+          choices=url_validation_choices,
+          default=default_url_validation_choice,
+          help='enable url validation type.')
+  
+  # Get available sort functions to use for argument choices
   choices = tuple(sort_fns.keys())
   if 'selectionsort' in sort_fns:
     default = 'selectionsort'
@@ -32,11 +50,12 @@ def main():
                       default=default,
                       help='sort function to use')
 
-  results = parser.parse_args()
-  infile = results.i
-  outfile = results.o
-  sort_fn = results.sort_fn
-  urlvalidate = results.u
+  # Read parsed arguments 
+  results          = parser.parse_args()
+  infile           = results.i
+  outfile          = results.o
+  sort_fn          = results.sort_fn
+  url_validate_fn  = results.validate_fn
 
   # read lines
   try:
@@ -47,12 +66,10 @@ def main():
     infile.close()
     infile = None
 
-  # check for URL validation flag, if set we drop into validation function 
-  # and run the validation
-  if urlvalidate:
-    lines = _validate(lines)
+  # argument parser guarantees a valid choice for url_validate_fn
+  lines = _validate(lines, url_validation_fns[url_validate_fn])
 
-  # argparser guarantees a valid choice for sort_fn
+  # argument parser guarantees a valid choice for sort_fn
   lines = _sort(lines, sort_fns[sort_fn])
 
   # write output
@@ -67,14 +84,14 @@ def main():
 
   sys.exit(0)
   
-def _validate(url_list):
+def _validate(url_list, url_validation_fn):
   """Returns a validated copy of URLs list"""
   validated_url = list(url_list)
   
-  ##
-  ## Add validation function/algorithm here   
-  ##
+  url_validation_fn(validated_url)
   
+  ## See url_validation.py for adding implementations for
+  ## various validation functions
   return validated_url
 
 def _sort(str_list, sort_fn):

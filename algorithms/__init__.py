@@ -2,6 +2,7 @@ import heapsort
 import radixsort
 import selectionsort
 import mergesort
+import url_validation
 import other_sort_algorithms as other
 
 def wrapper(sort_fn):
@@ -22,3 +23,9 @@ sort_fns = {
   'selectionsort2': wrapper(other.selectionsort),
 }
 
+# URL validation options to function references 
+url_validation_fns = {
+  'all':     url_validation.all,
+  'valid':   url_validation.valid,
+  'invalid': url_validation.invalid,
+}
