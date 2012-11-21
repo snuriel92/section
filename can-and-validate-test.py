@@ -28,13 +28,13 @@ class UrlTracker:
     return tmp.geturl()
 
   def lessThan(self, u2):
-    return (self < u2)
+    return (self.url < u2.url)
 
   def greaterThan(self, u2):
-    return (self > u2)
+    return (self.url > u2.url)
 
   def equals(self, u2):
-    return (self == u2)
+    return (self.url == u2.url)
 
 
 class TestURLS(unittest.TestCase):
@@ -70,9 +70,9 @@ class TestURLS(unittest.TestCase):
                  "HTTP://reddit.com/r/Politics" : "http://reddit.com/r/Politics",
                  "" : "",
                  "https://mail.google.com#" : "https://mail.google.com",
-                 "https://www.google.com/search?q=jane+smith&ie=utf" : 
+                 "https://www.google.com/search?q=jane+smith&ie=utf" :
                     "https://www.google.com/search?q=jane+smith&ie=utf",
-                 "http://en.wikipedia.org:80/wiki/Unit_testing?" : 
+                 "http://en.wikipedia.org:80/wiki/Unit_testing?" :
                       "http://en.wikipedia.org:80/wiki/Unit_testing",
                  "isthisaurl?" : "isthisaurl",
                  "http://en.wikipedia.org//" : "http://en.wikipedia.org//",
@@ -95,6 +95,62 @@ class TestURLS(unittest.TestCase):
     # because the user should know better :)
     # self.checkValid(3, False)
     # self.checkValid(None, False)
+
+  def testComparator(self):  # testing valid urls because that's the point of this...
+    u1 = UrlTracker("http://a.com")
+    u2 = UrlTracker("http://b.com")
+    u3 = UrlTracker("http://www.a.com")
+    u4 = UrlTracker("http://wikipedia.com")
+    u5 = UrlTracker("http://facebook.com?")
+    empty = UrlTracker("")
+
+    self.assertEqual(u1.lessThan(u2), True)
+    self.assertEqual(u1.greaterThan(u2), False)
+    self.assertEqual(u1.equals(u2), False)
+
+    self.assertEqual(u1.lessThan(u3), True)
+    self.assertEqual(u1.greaterThan(u3), False)
+    self.assertEqual(u1.equals(u3), False)
+
+    self.assertEqual(u1.lessThan(u4), True)
+    self.assertEqual(u1.greaterThan(u4), False)
+    self.assertEqual(u1.equals(u4), False)
+
+    self.assertEqual(u1.lessThan(u4), True)
+    self.assertEqual(u1.greaterThan(u4), False)
+    self.assertEqual(u1.equals(u4), False)
+
+    self.assertEqual(u1.lessThan(empty), False)
+    self.assertEqual(u1.greaterThan(empty), True)
+    self.assertEqual(u1.equals(empty), False)
+
+    self.assertEqual(empty.equals(empty), True)
+
+    self.assertEqual(u2.lessThan(u1), False)
+    self.assertEqual(u2.greaterThan(u1), True)
+    self.assertEqual(u2.equals(u1), False)
+
+    self.assertEqual(u2.lessThan(empty), False)
+    self.assertEqual(u2.greaterThan(empty), True)
+    self.assertEqual(u2.equals(empty), False)
+
+    self.assertEqual(u3.lessThan(u4), False)
+    self.assertEqual(u3.greaterThan(u4), True)
+    self.assertEqual(u3.equals(u4), False)
+
+    self.assertEqual(u4.lessThan(u4), False)
+    self.assertEqual(u4.greaterThan(u4), False)
+    self.assertEqual(u4.equals(u4), True)
+
+    self.assertEqual(u4.lessThan(empty), False)
+    self.assertEqual(u4.greaterThan(empty), True)
+    self.assertEqual(u4.equals(empty), False)
+
+    self.assertEqual(empty.lessThan(empty), False)
+    self.assertEqual(empty.greaterThan(empty), False)
+    self.assertEqual(empty.equals(empty), True)
+
+
 
 if __name__ == '__main__':
     unittest.main()
