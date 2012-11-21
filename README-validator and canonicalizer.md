@@ -3,7 +3,7 @@ section
 (Run `python can-and-validate.py -h` to see instructions for running 
   can-and-validate.py.)
 
-We chose to implement the sorting as follows.
+I chose to implement the comparison as follows.
 * A character with a lower ASCII value comes before a character with a higher
   ASCII value. As a result, this means capitals take precedence over lowercase
   characters. This was chosen because parts of URLs are case sensitive and we
