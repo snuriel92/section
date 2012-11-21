@@ -150,7 +150,5 @@ class TestURLS(unittest.TestCase):
     self.assertEqual(empty.greaterThan(empty), False)
     self.assertEqual(empty.equals(empty), True)
 
-
-
 if __name__ == '__main__':
     unittest.main()
