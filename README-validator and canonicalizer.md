@@ -19,7 +19,9 @@ I chose to implement the comparison as follows.
 ** Assume 0-based indexing for each url, each index in a url corresponds to a 
    character in the url. A url’s length is the number of characters it consists of.
 
-There is a python script can-and-validate.py in our root directory that takes one
+------------------------------------------------------------------------------------
+
+There is a python script can-and-validate.py in the root directory that takes one
 argument. The argument, -i, provides the input file name. 
 
 The proper usage of our script is:
@@ -42,32 +44,38 @@ Source: http://en.wikipedia.org/wiki/Sarah_Jane_Smith#Appearances
   Canonical: http://en.wikipedia.org/wiki/Sarah_Jane_Smith
   Source unique: True
   Canonicalized URL unique: True
+  
+------------------------------------------------------------------------------------
  
 VALIDATION:
+
 To check if a url is valid, you must create a UrlTracker object from the 
 url (as a string) in question. Say you call it "ut"; you can then call 
 ut.valid to check whether the url is valid or not. 
 
 Valid URL Spec:
 
-valid-url ::= protocol “//” domain [ “:” port ] “/” [ path ] [ “?” query ] [ fragment ]
+* valid-url ::= protocol “//” domain [ “:” port ] “/” [ path ] [ “?” query ] [ fragment ]
 
-protocol ::= ”[a-z][\w-]+:” // alphanum + ‘-’, starts with lowercase alpha
+* protocol ::= ”[a-z][\w-]+:” // alphanum + ‘-’, starts with lowercase alpha
 
-domain ::= “[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}” // if it looks like a domain, it is one
-(The domain must contain a period to be valid)
+* domain ::= “[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}” // if it looks like a domain, it is one
+  (The domain must contain a period to be valid)
 
-port ::= “[0-9]{0-5}” // valid ports range 0-65535
+* port ::= “[0-9]{0-5}” // valid ports range 0-65535
 
-path ::= “[^\s()<>?]+”
+* path ::= “[^\s()<>?]+”
 
-query ::= key-value-pair [ “&” query ] // any number of key-value pairs separated by “&”
+* query ::= key-value-pair [ “&” query ] // any number of key-value pairs separated by “&”
 
-key-value-pair ::= “[^\s&=]+=[^\s&=]+” // two non-space/’&’/’=’ separated by ‘=’
+* key-value-pair ::= “[^\s&=]+=[^\s&=]+” // two non-space/’&’/’=’ separated by ‘=’
 
-fragment ::= “#[^\s]” // no spaces, otherwise, anything goes
+* fragment ::= “#[^\s]” // no spaces, otherwise, anything goes
+
+------------------------------------------------------------------------------------
 
 CANONICALIZATION:
+
 To get the canonicalized url, you must create a UrlTracker object from the 
 url (as a string) in question. Say you call it "ut"; you can then call 
 ut.canonicalized to get the canonicalized url back. 
