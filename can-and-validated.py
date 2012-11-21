@@ -15,7 +15,8 @@ class UrlTracker:
     self.valid = self.validate(url)
     self.canonicalized = self.canonicalize(url)
   def validate(self, url):
-    return True
+    parsedUrl = urlparse.urlsplit(url)
+    return (parsedUrl.netloc != "")
   def canonicalize(self, url):
     poundIdx = url.find("#")  
     if (poundIdx > -1):
@@ -50,12 +51,13 @@ def main():
   urlarr = []
   
   for line in lines:
-    line = line[0:len(line)-1]
-    urlarr.append(UrlTracker(line))
-    print "Source: " + urlarr[i].url
-    print urlarr[i].valid
-    print "Canonical: " + urlarr[i].canonicalized
-    i += 1
+    if(line != '\n'):
+      line = line[0:len(line)-1]
+      urlarr.append(UrlTracker(line))
+      print "Source: " + urlarr[i].url
+      print urlarr[i].valid
+      print "Canonical: " + urlarr[i].canonicalized
+      i += 1
   
 if __name__ == '__main__':
   main()
